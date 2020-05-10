@@ -1,16 +1,37 @@
 1. Front End
 
+•	Quick Refill (non-login): only for basic and one-time refill
 
-
-
-
-
-
-
-
-
-
+•	Normal Refill (Login required)
+Functions:
+    1.	Family members sharing one account
+    2.	Account history management
+    3.	Set up refill online
+    4.	Set up pick-up time (calendar: maximum number hourly; according to the status of the stock)
+    5.	Auto refill for all members under the same account (pause auto refill anytime)
+    6.	Notification by email or text
+    7.	Pick up in store or delivery
+    8.	Distance instruction (google map)
+    9.	Special request section: emergency request/ huge volume request/ disability/ early request/ others
 
 
 
 2. Back End
+    SQL forms：
+        1.	Registered costumer form
+        2.	Non-registered costumer form
+        3.	Booking details form by registered customer
+        4.	Booking details form by non-registered customer
+        5.	Inventory form
+        6.	Delivery request form
+        7.	Shift arrangement form
+Functions：
+    o	Back-end login (manager/ staff)
+    o	Access to all the forms on SQL (essential information is non-editable)
+    o	Dashboard: Booking details/ calendar/ working schedule/ inventory/ emergency requested/ so on…)
+    o	Reports for daily/monthly sales
+    o	Monthly schedule for auto refill customers
+    o	Massage sending (automatically)
+    o	Low stock alert for store manager
+
+
