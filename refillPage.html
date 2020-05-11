@@ -1,0 +1,26 @@
+ <html lang="en">
+ 	<link rel="stylesheet" type="text/css" href="refillPage.css">
+	<meta charset="utf-8">
+  <head>
+    <title>Refills</title>
+  </head>
+</body>
+  <h1 style="text-align: center;">Refills</h1>
+  <p class="center-class">
+    <div class="quickRefillContainer">
+	     <button id="quickRefill">Quick Refill</button>
+       <h3>No login info required!</h3>
+
+    </div>
+    <div class="normalRefillContainer">
+        <form id="refillLoginForm" action="/user/index" method="get">
+          <label>Username</label>
+          <input id="uname" name="uname" type="text" placeholder="Username">
+          <label>Password</label>
+          <input id="pwd" name="pwd" type="password" placeholder="Password">
+        </form>
+        <button id="normalRefill">Normal Refill</button>
+    </div>
+  </p>
+</body>
+</html>
