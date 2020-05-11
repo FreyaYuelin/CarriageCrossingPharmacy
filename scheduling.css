@@ -1,0 +1,35 @@
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+h1 {
+  color: blue;
+  text-align: left;
+}
+
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: orange;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 20px;
+  text-align: center;
+}
+
+#container-head p {
+  font-size: 20;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  width: 12%;
+}
+
+th {
+  background-color: #a83240;
+}
+
