@@ -4,7 +4,7 @@ body {font-family: Verdana, sans-serif;}
 /* Month header */
 .calendar {
   padding: 70px 25px;
-  width: 85%;
+  width: 94%;
   margin: auto;
   background: #00bfff;
   text-align: center;
@@ -14,6 +14,12 @@ body {font-family: Verdana, sans-serif;}
   padding: 0;
 }
 
+#container-calendar {
+  margin-left: 10%;
+  margin-top: 4%;
+  width: 80%;
+}
+
 .calendar ul li {
   color: white;
   font-size: 20px;
@@ -21,19 +27,21 @@ body {font-family: Verdana, sans-serif;}
   letter-spacing: 3px;
 }
 .calendar .prev {
+  width: 3%;
   float: left;
   padding-top: 10px;
 }
 
 /* Next button */
 .calendar .next {
+  width: 3%;
   float: right;
   padding-top: 10px;
 }
 
 /* Weekdays (Mon-Sun) */
 .weekdays {
-  width: 88.5%;
+  width: 98.3%;
   margin: auto;
   padding: 10px 0;
   background-color: #303030;
@@ -49,7 +57,7 @@ body {font-family: Verdana, sans-serif;}
 
 /* Days (1-31) */
 .days {
-  width: 88.5%;
+  width: 98.3%;
   margin: auto;
   padding: 10px 0;
   background: #eee;
