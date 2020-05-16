@@ -23,6 +23,11 @@ body {font-family: Verdana, sans-serif;}
   background-color: purple;
 }
 
+#quick-email {
+  width: 200px;
+  margin-left: 30px;
+}
+
 #normalRefill {
   background-color: #a83232; /* Green */
   border: none;
