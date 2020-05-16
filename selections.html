@@ -1,0 +1,51 @@
+ <html lang="en">
+  <link rel="stylesheet" type="text/css" href="main.css">
+ 	<link rel="stylesheet" type="text/css" href="selections.css">
+  <head>
+    <title>Selections</title>
+      <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+</body>
+  <div class="topnav">
+  <a class="active" href="#home">Home</a>
+  <a href="#news">News</a>
+  <a href="#contact">Contact</a>
+  <a href="#about">About</a>
+  </div>
+
+    <p><h3>Please choose which you wish to purchase from the following items.</h3></p>
+    <p><input type="text" name="filter" id="filter" placeholder="type to filter"></p>
+    <hr style="height: 8px; top: 20px; margin-bottom: 50px;">
+
+      <form id="selection-form" method="post" action=""> 
+        <div id="product">
+        <image src="heart.png" height="80" width="120" style="border: 1px solid red;">
+        <label for="name">Item 1</label>
+        <input type="text" name="Item 1" id="item-1" value="3">
+      </div><div id="product">
+        <image src="heart.png" height="80" width="120" style="border: 1px solid red;">
+        <label for="name">Item 2</label>
+        <input type="text" name="Item 2" id="item-2" value="2">
+        </div>
+        <div id="product">
+          <image src="heart.png" height="80" width="120" style="border: 1px solid red;">
+        <label for="name">Item 3</label>
+        <input type="text" name="Item 3" id="item-3" value="5">
+        </div>
+        <div id="product">
+          <image src="heart.png" height="80" width="120" style="border: 1px solid red;">
+        <label for="name">Item 4</label>
+        <input type="text" name="Item 4" id="item-4" value="11">
+      </div>
+        <div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </div>
+      </form>
+
+  </div>
+</body>
+</html>
