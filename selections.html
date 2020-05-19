@@ -6,6 +6,7 @@
       <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
@@ -17,11 +18,11 @@
   <a href="#about">About</a>
   </div>
 
-    <p><h3>Please choose which you wish to purchase from the following items.</h3></p>
+    <p><h3>Please choose which you wish to purchase from the following items.</h3> </p>
     <span id="float-span">
-    <p id="username"></p>
-    <p><input type="text" name="filter" id="filter" placeholder="type to filter"></p></span>
-    <hr style="height: 8px; top: 20px; margin-bottom: 50px;">
+    <p id="username" style="float: left;"></p> 
+    <input type="text" name="filter" id="filter" placeholder="type to search" style="float: right; margin-right: 30%;" /></span>
+    <br><hr style="width: 100%; height: 2px; color: gray; background-color: gray;">
 
       <form id="selection-form" method="post" action=""> 
         <div id="product">
@@ -47,10 +48,18 @@
         <label for="name">Item 4</label>
         <input type="text" name="Item 4" id="item-input" value="11">
       </div>
-        <div>
+        <div id="submit-button">
         <button type="submit" class="btn btn-success">Submit</button>
       </div>
       </form>
+
+      <div id="search-box">
+        <div id="product">
+        <image src="heart.png" height="80" width="120" style="border: 1px solid red;">
+        <label for="name">Item 2</label>
+        <input type="text" name="Item 4" id="item-input" value="11" style="visibility: hidden;">
+        <button id="add-button">+</button>
+      </div>
 
   </div>
 

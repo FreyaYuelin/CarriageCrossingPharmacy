@@ -6,6 +6,17 @@ body {font-family: Verdana, sans-serif;}
 
 }
 
+#float-span {
+  width: 80%;
+  background-color: blue;
+}
+
+#username {
+  margin-left: 50px;
+  font-size: 22;
+  font-weight: bold;
+}
+
 #filter {
   width: 300px;
   margin-left: 35%;
@@ -17,11 +28,19 @@ body {font-family: Verdana, sans-serif;}
 
 }
 
+#add-button {
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 30px;
+}
+
 
 
 #selection-form {
   width: 40%;
   margin-left: 40px;
+  padding-top: 30px;
+  float: left;  
 }
 
 
@@ -41,7 +60,19 @@ input {
 }
 
 
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
 
 
-
-
+#search-box {
+  float: left;
+  margin-left: 50px;
+  padding-top: 30px;
+  width: 40%;
+}
