@@ -68,8 +68,12 @@ body {font-family: Verdana, sans-serif;}
 #selection-form {
   width: 40%;
   margin-left: 40px;
-  padding-top: 30px;
-  float: left;  
+  padding-top: 30px; 
+}
+
+#add-product {
+  background-color: #f44336;
+  margin-left: 40px;
 }
 
 

@@ -101,9 +101,16 @@ function switchCategory(e) {
                 input.id = "input-item";
                 input.value = c.quantity;
 
+                let button = document.createElement('button');
+                button.setAttribute("type", "button");
+                button.setAttribute("id", "add-product");
+                button.innerHTML = "Add";
+
+
                 element.appendChild(image);
                 element.appendChild(label);
                 element.appendChild(input);
+                element.appendChild(button);
                 selectionForm.appendChild(element);
             })
             break;
@@ -130,9 +137,15 @@ function switchCategory(e) {
                 input.id = "input-item";
                 input.value = c.quantity;
 
+                let button = document.createElement('button');
+                button.setAttribute("id", "add-product");
+                button.innerHTML = "Add";
+
+
                 element.appendChild(image);
                 element.appendChild(label);
                 element.appendChild(input);
+                element.appendChild(button);
                 selectionForm.appendChild(element);
             })
             break;
@@ -159,9 +172,15 @@ function switchCategory(e) {
                 input.id = "input-item";
                 input.value = c.quantity;
 
+                let button = document.createElement('button');
+                button.setAttribute("id", "add-product");
+                button.innerHTML = "Add";
+
+
                 element.appendChild(image);
                 element.appendChild(label);
                 element.appendChild(input);
+                element.appendChild(button);
                 selectionForm.appendChild(element);
             })
             break;
