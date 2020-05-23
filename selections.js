@@ -9,8 +9,11 @@ username.innerHTML = localStorage.getItem('uname');
 const submitButton = document.querySelector('#submit-button');
 
 const categories = document.querySelectorAll('#category');
-log(categories)
 categories.forEach(c => c.addEventListener('click', switchCategory));
+
+var addProduct = document.querySelectorAll('#add-product');
+log(addProduct)
+addProduct.forEach(b => b.addEventListener('click', addToShoppingList));
 
 
 
@@ -70,6 +73,23 @@ let item32 = {
 var category1 = [item11, item12];
 var category2 = [item21, item22, item23];
 var category3 = [item31, item32];
+var category4 = [];
+
+function addToShoppingList(e) {
+    e.preventDefault();
+    log('success')
+    var product = e.target.parentElement;
+    log(product);
+    var label = product.getElementsByTagName('label');
+    log(label);
+    var item = {
+        name: label[0].innerHTML,
+        src: 'heart.png',
+        price: 310
+    }
+    log(item.name);
+    category4.push(item);
+}
 
 
 
@@ -89,6 +109,12 @@ function switchCategory(e) {
                 image.setAttribute("width", "120");
                 image.setAttribute("height", "80");
                 image.setAttribute("style", "border: 1px solid red;");
+
+                let price = document.createElement("span");
+                price.setAttribute("id", "price");
+                price.innerHTML = c.price;
+
+                let br = document.createElement("br");
                 
 
                 let label = document.createElement("label");
@@ -102,12 +128,14 @@ function switchCategory(e) {
                 input.value = c.quantity;
 
                 let button = document.createElement('button');
-                button.setAttribute("type", "button");
+                button.setAttribute("type", "button");  
                 button.setAttribute("id", "add-product");
                 button.innerHTML = "Add";
 
 
                 element.appendChild(image);
+                element.appendChild(price);
+                element.appendChild(br);
                 element.appendChild(label);
                 element.appendChild(input);
                 element.appendChild(button);
@@ -125,6 +153,12 @@ function switchCategory(e) {
                 image.setAttribute("width", "120");
                 image.setAttribute("height", "80");
                 image.setAttribute("style", "border: 1px solid red;");
+
+                let price = document.createElement("span");
+                price.setAttribute("id", "price");
+                price.innerHTML = c.price;
+
+                let br = document.createElement("br");
                 
 
                 let label = document.createElement("label");
@@ -138,11 +172,14 @@ function switchCategory(e) {
                 input.value = c.quantity;
 
                 let button = document.createElement('button');
+                button.setAttribute("type", "button");  
                 button.setAttribute("id", "add-product");
                 button.innerHTML = "Add";
 
 
                 element.appendChild(image);
+                element.appendChild(price);
+                element.appendChild(br);
                 element.appendChild(label);
                 element.appendChild(input);
                 element.appendChild(button);
@@ -160,6 +197,12 @@ function switchCategory(e) {
                 image.setAttribute("width", "120");
                 image.setAttribute("height", "80");
                 image.setAttribute("style", "border: 1px solid red;");
+
+                let price = document.createElement("span");
+                price.setAttribute("id", "price");
+                price.innerHTML = c.price;
+
+                let br = document.createElement("br");
                 
 
                 let label = document.createElement("label");
@@ -173,18 +216,68 @@ function switchCategory(e) {
                 input.value = c.quantity;
 
                 let button = document.createElement('button');
+                button.setAttribute("type", "button");  
                 button.setAttribute("id", "add-product");
                 button.innerHTML = "Add";
 
 
                 element.appendChild(image);
+                element.appendChild(price);
+                element.appendChild(br);
                 element.appendChild(label);
                 element.appendChild(input);
                 element.appendChild(button);
                 selectionForm.appendChild(element);
             })
             break;
+        case 'Category 4':
+            log('click3');
+            category4.forEach(c => {
+                let element = document.createElement("div");
+                element.setAttribute("id", "product");
+
+                let image = document.createElement("img");
+                image.setAttribute("src", c.src);
+                image.setAttribute("width", "120");
+                image.setAttribute("height", "80");
+                image.setAttribute("style", "border: 1px solid red;");
+
+                let price = document.createElement("span");
+                price.setAttribute("id", "price");
+                price.innerHTML = c.price;
+
+                let br = document.createElement("br");
+                
+
+                let label = document.createElement("label");
+                label.for = "name";
+                label.innerHTML = c.name;
+
+                let input = document.createElement("input");
+                input.type = "text";
+                input.name = c.name;
+                input.id = "input-item";
+                input.value = c.quantity;
+
+                let button = document.createElement('button');
+                button.setAttribute("type", "button");  
+                button.setAttribute("id", "add-product");
+                button.innerHTML = "Add";
+
+
+                element.appendChild(image);
+                element.appendChild(price);
+                element.appendChild(br);
+                element.appendChild(label);
+                element.appendChild(input);
+                element.appendChild(button);
+                selectionForm.appendChild(element);
+            })
+            break;
+
     }
+    addProduct = document.querySelectorAll('#add-product');
+    addProduct.forEach(b => b.addEventListener('click', addToShoppingList));
 }
 
 
