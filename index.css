@@ -1,66 +1,58 @@
+* {box-sizing: border-box;}
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
 
-/* Month header */
-.calendar {
+.month {
+  margin-top: 20px;
   padding: 70px 25px;
-  width: 94%;
-  margin: auto;
-  background: #00bfff;
+  width: 100%;
+  background: #1abc9c;
   text-align: center;
 }
-.calendar ul {
+
+.month ul {
   margin: 0;
   padding: 0;
 }
 
-#container-calendar {
-  margin-left: 10%;
-  margin-top: 4%;
-  width: 80%;
-}
-
-.calendar ul li {
+.month ul li {
   color: white;
   font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
-.calendar .prev {
-  width: 3%;
+
+.month .prev {
   float: left;
   padding-top: 10px;
 }
 
-/* Next button */
-.calendar .next {
-  width: 3%;
+.month .next {
   float: right;
   padding-top: 10px;
 }
 
-/* Weekdays (Mon-Sun) */
+.month .next:hover {
+  cursor: cell;
+}
+
 .weekdays {
-  width: 98.3%;
-  margin: auto;
+  margin: 0;
   padding: 10px 0;
-  background-color: #303030;
+  background-color: #ddd;
 }
 
 .weekdays li {
-
   display: inline-block;
   width: 13.6%;
-  color:  #A9A9A9;
+  color: #666;
   text-align: center;
 }
 
-/* Days (1-31) */
 .days {
-  width: 98.3%;
-  margin: auto;
   padding: 10px 0;
   background: #eee;
+  margin: 0;
 }
 
 .days li {
@@ -69,18 +61,30 @@ body {font-family: Verdana, sans-serif;}
   width: 13.6%;
   text-align: center;
   margin-bottom: 5px;
-  font-size:14px;
+  font-size:12px;
   color: #777;
-
 }
 
-.days li a {
-    text-decoration: none;
+.days li:hover {
+  cursor: pointer;
 }
 
-/* Highlight the "current" day */
 .days li .active {
   padding: 5px;
   background: #1abc9c;
   color: white !important
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+  .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+  .weekdays li, .days li {width: 12.5%;}
+  .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+  .weekdays li, .days li {width: 12.2%;}
 }
