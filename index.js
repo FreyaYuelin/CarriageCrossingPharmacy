@@ -8,6 +8,8 @@ log(days)
 
 const rightArrow = document.querySelector(".next");
 rightArrow.addEventListener('click', nextMonth);
+const leftArrow = document.querySelector(".prev");
+leftArrow.addEventListener('click', prevMonth);
 
 const monthYear = document.querySelector("#month-year");
 const year = document.querySelector("#year");
@@ -55,13 +57,22 @@ function generateHours() {
 
 
 
-
+function prevMonth() {
+    let curMonth = months.indexOf(monthYear.childNodes[0].textContent);
+    let curYear = document.querySelector("#year").innerHTML;
+    curMonth--;
+    if (curMonth === -1) {
+        curMonth = 11;
+        curYear--;
+    }
+    monthYear.childNodes[0].textContent = months[curMonth];
+    year.innerHTML = curYear;
+}
 
 
 
 function nextMonth() {
     let curMonth = months.indexOf(monthYear.childNodes[0].textContent);
-    log(curMonth);
     let curYear = document.querySelector("#year").innerHTML;
     curMonth++;
     if (curMonth === 12) {
