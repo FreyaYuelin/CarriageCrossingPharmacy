@@ -75,6 +75,46 @@ body {font-family: Verdana, sans-serif;}
   color: white !important
 }
 
+#schedule-bar {
+  min-height: 50px;
+  background-color: gray;
+}
+
+#schedule-bar li {
+  margin: auto;
+  float: left;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  height: 100%;
+  text-align: center;
+}
+
+#schedule-bar li:hover {
+  cursor: pointer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3; 
+  padding: 10px;
+}
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.grid-item:hover {
+  background-color: yellow;
+  cursor: pointer;  
+}
+
+
+
+
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
   .weekdays li, .days li {width: 13.1%;}
