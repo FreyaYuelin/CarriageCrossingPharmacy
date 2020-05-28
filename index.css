@@ -1,12 +1,149 @@
 * {box-sizing: border-box;}
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
-
+.menu ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    position: relative;
+    overflow: inherit !important;
+    z-index: 1000;
+    font-weight: 900;
+    margin-top: 25px;
+}
+.menu ul li {
+    position: relative;
+    display: inline-block;
+    padding: 0;
+    margin-left: 20px;
+}
+.menu ul li a {
+    position: relative;
+    border: 0 none;
+    border-color: transparent transparent; /* the transitioned value, inherited by the pseudo element */
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 7px 20px;
+    font-size: 18px;
+    line-height: 1em;
+    text-transform: uppercase;
+    color: #efefef;
+    -webkit-transition: all 200ms ease-in;
+    -o-transition: all 200ms ease-in;
+    -moz-transition: all 200ms ease-in;
+}
+.menu ul li a:hover {
+    color: #ca6666;
+    background: #ececec;
+}
+.menu ul li.active a,
+.menu ul li.current-menu-item a,
+.menu ul li a.selected {
+    background: #ececec;
+    color: #ca6666;
+    border-color: #ececec transparent; /* changed hover value */
+}
+.menu ul li.active a:after,
+.menu ul li.current-menu-item a:after,
+.menu ul li a.selected:after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -5px;
+    bottom: -5px;
+    content: '';
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: inherit; /* inherit the transition */
+}
+.menu ul li ul {
+    position: absolute;
+    left: 0;
+    display: none;
+    visibility: hidden;
+    width: 168px;
+    padding: 17px 0 0 0;
+    margin: 0;
+}
+.menu ul li ul li,
+.menu ul li.active li,
+.menu ul li.current-menu-item li {
+    display: list-item;
+    margin: 0;
+    border-top: 1px solid rgba(0,0,0,0.15);
+    background: #ececec;
+    color: #ca6666;
+}
+.menu ul li.active li a,
+.menu ul li.current-menu-item li a {
+    background: transparent
+}
+.menu ul li li a:hover,
+.menu ul li.active li a:hover,
+.menu ul li.current-menu-item li a:hover {
+    background: transparent
+}
+.menu ul li ul li ul {
+    top: 0;
+    margin: 0;
+}
+.menu ul li ul li a {
+    margin: 0;
+    display: block;
+    line-height: 1;
+    font-size: 12px;
+    background: none;
+    padding: 12px 20px;
+    color: #616161;
+}
+.menu ul li ul li:first-child {
+    -webkit-border-radius: 3px 3px 0px 0px;
+    border-radius: 3px 3px 0px 0px;
+    border: none;
+}
+.menu ul li ul li:last-child {
+    -webkit-border-radius: 0px 0px 3px 3px;
+    border-radius: 0px 0px 3px 3px;
+}
+.menu ul li.active ul li a,
+.menu ul li.current-menu-item ul li a,
+.menu ul li ul li a {
+    color: #616161
+}
+.menu ul li.active ul li a:hover,
+.menu ul li.current-menu-item ul li a:hover,
+.menu ul li ul li a:hover {
+    color: #ca6666
+}
+.menu ul li.active ul li a:after,
+.menu ul li.current-menu-item ul li a:after,
+.menu ul li ul li a.selected:after {
+    display: none
+}
+* html .menu {
+    height: 1%
+}
+.selectnav {
+    display: none;
+    width: 280px;
+    margin: 0 auto;
+    background: transparent url(style/images/dropdown-arrow.png) no-repeat right center;
+    border-radius: 0;
+    border: 0;
+    background-color: #ebebeb;
+    max-width: 100%;
+    padding: 7px 10px;
+    line-height: 20px;
+    background-size: 30px 28px;
+    -webkit-appearance: none;
+}
+@media only screen and (-Webkit-min-device-pixel-ratio: 1.5), only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (min-device-pixel-ratio: 1.5) { 
+}
 .month {
   margin-top: 20px;
   padding: 70px 25px;
   width: 100%;
-  background: #1abc9c;
+  background: #ca6666;
   text-align: center;
 }
 

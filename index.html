@@ -6,18 +6,28 @@
     <title>Calendar</title>
   </head>
 </body>
-  <div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
-  </div>
+ <div class="logo">
+   <a href="#"><img src="logo.png"  /></a>
+   </div>
+<nav id="menu" class="menu">
+    <ul id="tiny">
+		<li  class="active"><a href="#refill">Refill</a></li>
+		<li  class="menu-item"><a href="#news">News</a>
+		</li>
+		<li  class="menu-item"><a href="#contact">Contact</a>
+		</li>
+		<li  class="menu-item"><a href="#">About</a></li>
+	</ul>
+</nav>
 
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-    <p>Some more text...</p>
-    <p>And some more...</p>
+  <div class="modal-content" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+    </div>
+    <span class"close">&times;</span>
+    <p>Protecting the health, safety and wellbeing of Pharmasave customers and staff is always our highest priority, but particularly during the rapidly evolving COVID-19 health situation.</p>
+    <p>If you have any of the following symptoms, please do not visit the pharmacy.</p>
+    <p>Fever or chills</br> Cough or trouble breathing</br>Fatigue</br>Muscle or body aches</br>Headache</br>New loss of taste or smell</br>Sore throat</br>Congestion or runny nose</br>Nausea or vomiting</br>Diarrhea</p>
+    <p>Please confirm:</p>
     <p><button id="modal-button" type="button">Yes</button>
       <button id="modal-button" type="button">No</button></p>
 
@@ -75,5 +85,6 @@
 </div>
     <script type="text/javascript" src="index.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </body>
 </html>
