@@ -1,7 +1,7 @@
-Adding specifications and instructions to webpages: Freya, Krystal
-
-Start working on manager-side UI(possibly with templates: Jason Z., JC, 
-
-finishing up picking a date/time using calendar/scheduler: Nicole, Jason Z., JC
-
-Adding a shopping list feature: Jason Z., Krystal
+1. pop-up: 先check用户是否生病
+2. 添加可选的service的 drop-down list：例如injection，consultation，prescription pickup.. 根据所选的service来改变time slot时长
+3. 根据每天的open hours不同，改变每天可预约的时间
+4. 添加special requests/instruction的input box
+5. 添加terms and conditions（？
+6. 添加submit button
+7. 完成之后自动发送confirmation email
