@@ -1,0 +1,111 @@
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+#selection-list {
+  width: 70%;
+
+}
+
+
+#category-bar {
+  overflow: hidden;
+  background-color: white;
+  border: 1px solid black;
+}
+
+#category-bar a {
+  float: left;
+  color: red;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 12px;
+  border-left: 2px dotted gray;
+  border-right: 2px dotted gray;
+}
+
+#category-bar a:hover {
+  background-color: #ddd;
+  color: black;
+  cursor: pointer;
+}
+#category-bar a:active {
+  background-color: black; 
+  color: white;
+}
+
+
+#float-span {
+  width: 80%;
+  background-color: blue;
+}
+
+#username {
+  margin-left: 50px;
+  font-size: 22;
+  font-weight: bold;
+}
+
+#filter {
+  width: 300px;
+  margin-left: 35%;
+  border: 2px solid black;
+}
+
+#item-input {
+  margin-left: 50px;
+
+}
+
+#add-button {
+  border-radius: 50%;
+  background-color: red;
+  margin-left: 30px;
+}
+
+
+
+#selection-form {
+  width: 40%;
+  margin-left: 40px;
+  padding-top: 30px; 
+}
+
+#add-product {
+  background-color: #f44336;
+  margin-left: 40px;
+}
+
+
+#product {
+  margin: 10px 10px 10px;
+  border: 1px solid red;
+}
+
+input {
+  width: 30px;
+}
+
+#product-container {
+  height: 40px;
+  width: 70%;
+  display: inline-block;
+}
+
+
+.vl {
+  border-left: 6px solid green;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  top: 0;
+}
+
+
+#search-box {
+  float: left;
+  margin-left: 50px;
+  padding-top: 30px;
+  width: 40%;
+}
