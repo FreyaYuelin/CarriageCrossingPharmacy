@@ -1,4 +1,4 @@
-1. pop-up: 先check用户是否生病
+1. pop-up: 先check用户是否生病 (done)
 2. 添加可选的service的 drop-down list：例如injection，consultation，prescription pickup.. 根据所选的service来改变time slot时长
 3. 根据每天的open hours不同，改变每天可预约的时间
 4. 添加special requests/instruction的input box
