@@ -11,20 +11,20 @@
   </head>
 </body>
 <div class="topnav">
-  <a class="active" href="#home">Home</a>
-  <a href="#news">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
+  <a class="active" href="#home">Option 1</a>
+  <a href="#news">Option 2</a>
+  <a href="#contact">Option 3</a>
+  <a href="#about">Option 4</a>
 </div>
-  <h1 style="text-align: center;">Refills</h1>
+  <h1 style="text-align: center;">Appointments</h1>
   <p class="center-class">
-    <div class="quickRefillContainer">
-	     <button id="quickRefill" type="button">Quick Refill</button>
-       <h3>No login info required!</h3>
-       <p>A notification will be sent to the following mail address:</p>
+    <form class="quickRefillContainer" action="/index/auth" method="post">
+	     
+       <h3>No sensitive information required!</h3>
+       <p style="text-align: center;">A notification will be sent to the following mail address:</p>
        <input type="text" name="quick-email" id="quick-email" placeholder="Enter your email here">
-
-    </div>
+       <button id="quickRefill" type="submit">Schedule an appointment</button>
+    </form>
     <div class="normalRefillContainer">
         <form id="refillLoginForm" action="/index/auth" method="post">
           <p style="text-align: center; font-size: 20px; font-weight: bold;">Please log in</p>
