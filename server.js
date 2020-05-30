@@ -50,11 +50,11 @@ app.post('/index/auth', (req, res) => {
     // }
 
 })
-// var queryString = "INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone)values('john123@gmail.com', '050220', '13:30', '14:00', '2', 'no special considerations', '6955 Fielding', '123-456-7890')"
-// pool.query(queryString, (err, resp) => {
-//     log(err, resp);
-//     pool.end();
-// })
+var queryString = "INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone)values('john123@gmail.com', '050220', '13:30', '14:00', '2', 'no special considerations', '6955 Fielding', '123-456-7890')"
+pool.query(queryString, (err, resp) => {
+    log(err, resp);
+    pool.end();
+})
 
   //[req.body.email, req.body.name, req.body.start, req.body.finish, req.body.option, req.body.considerations, req.body.address, req.body.phone], (err, resp) => {
 app.post('/appointment', (req, res) => {
