@@ -30,6 +30,13 @@ app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended:true }));
 
+const options = {
+  "One": 1,
+  "Two": 2,
+  "Three": 3,
+  "Four": 4
+}
+
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/refillPage.html');
@@ -49,18 +56,52 @@ app.post('/index/auth', (req, res) => {
     //     res.status(400).redirect('/');
     // }
 
-})
-var queryString = "INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone)values('john123@gmail.com', '050220', '13:30', '14:00', '2', 'no special considerations', '6955 Fielding', '123-456-7890')"
-pool.query(queryString, (err, resp) => {
-    log(err, resp);
-    pool.end();
+// })
+// var queryString = "INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone)values('john123@gmail.com', '050220', '13:30', '14:00', '2', 'no special considerations', '6955 Fielding', '123-456-7890')"
+// pool.query(queryString, (err, resp) => {
+//     log(err, resp);
+//     pool.end();
 })
 
   //[req.body.email, req.body.name, req.body.start, req.body.finish, req.body.option, req.body.considerations, req.body.address, req.body.phone], (err, resp) => {
 app.post('/appointment', (req, res) => {
-  //var queryString = 'INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone, lastname) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)'
+  
+  log(req.body);
+  var queryString = 'INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
+  pool.query(queryString, [req.body.email, "050420", req.body.start, req.body.finish, req.body.option, req.body.considerations, "6955 Fielding", "123-456-7890"], (err, resp) => {
+    log(err, resp);
 
+  })
+  res.status(200).send();
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

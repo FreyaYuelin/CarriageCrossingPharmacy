@@ -1,3 +1,4 @@
+  
 * {box-sizing: border-box;}
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
@@ -13,6 +14,7 @@ body {font-family: Verdana, sans-serif;}
   background-color: yellow;
   margin: 50px 40px;
   float: left;
+  min-height: 300px;
 }
 
 .contact-box p {
@@ -20,10 +22,11 @@ body {font-family: Verdana, sans-serif;}
 }
 
 .suggestion-box {
-  width: 35%;
+  min-width: 35%;
   background-color: yellow;
   margin: 50px 40px;
   float: left;
+  min-height: 300px;
 }
 
 .suggestion-box input {
@@ -52,6 +55,11 @@ body {font-family: Verdana, sans-serif;}
   width: 80%;
   height: 100%;
 }
+
+textarea {
+  resize: none;
+}
+
 
 
 
