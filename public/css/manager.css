@@ -1,0 +1,36 @@
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+.main-container {
+  margin: 15px 15px;
+  min-height: 100px;
+}
+
+.suggestions-table {
+
+
+  border: 1px double black;
+}
+
+.suggestion-container {
+  margin-right: 8%;
+  float: right;
+}
+
+table * {
+  margin: 3px 15px;
+}
+
+.appointment-table {
+  float: left;
+  border: 1px double black;
+}
+
+tr {
+  border: 1px solid #dddddd;
+}
+
+
+td {
+  border: 1px solid #dddddd;
+}
