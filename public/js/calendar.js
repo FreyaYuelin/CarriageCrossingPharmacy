@@ -215,7 +215,7 @@ function record(e) {
 
     const url = "/appointment";
     const data = {
-        month: months[today.getMonth()],
+        month: monthYear.childNodes[0].textContent,
         year: year.innerHTML,
         day: days.querySelector(".active").innerHTML,
         option: curChecked.parentElement.childNodes[0].textContent,
