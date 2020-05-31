@@ -225,6 +225,13 @@ body {font-family: Verdana, sans-serif;}
   background: white;
 }
 
+#submit-button {
+  background-color: green;
+  border-radius: 7%;
+  margin-left: 15px;
+  margin-top: 15px;
+  font-size: 16;
+}
 
 
 
