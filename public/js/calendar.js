@@ -15,8 +15,6 @@ const deliverySchedule = {
 const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 
-
-
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 //var myStorage = window.localStorage
@@ -126,22 +124,35 @@ function generateHours() {
     }
 
     log(intervals[14].split("-")[0].split(":")[0], today.getHours());
-
-    const filteredIntervals = intervals.filter(i => {
-        let h = parseInt(i.split("-")[0].split(":")[0]);
-        let m = parseInt(i.split("-")[0].split(":")[1]);
-        if (today.getHours() + 1 < h) {
-            return i;
-        } else if (today.getHours() + 1 === h) {
-            if (today.getMinutes() <= m) {
-                log(i, h, m)
+    if (months.indexOf(monthYear.childNodes[0].textContent) === today.getMonth() && parseInt(year.innerHTML) === today.getFullYear() && parseInt(days.querySelector(".active").innerHTML) === today.getDate()) {
+        const filteredIntervals = intervals.filter(i => {
+            let h = parseInt(i.split("-")[0].split(":")[0]);
+            let m = parseInt(i.split("-")[0].split(":")[1]);
+            if (today.getHours() + 1 < h) {
                 return i;
+            } else if (today.getHours() + 1 === h) {
+                if (today.getMinutes() <= m) {
+                    log(i, h, m)
+                    return i;
+                }
             }
-        }
-        
-    })
+            
+        })
+        intervals = filteredIntervals;
+    }
+    var selectedDay = new Date(year.innerHTML, months.indexOf(monthYear.childNodes[0].textContent), parseInt(days.querySelector(".active").innerHTML));
+    log(selectedDay.getDay())
+    if (selectedDay.getDay() === 0) { // Sunday
+        intervals = [];
+    }
+    else if (selectedDay.getDay() === 6) { // Saturday
+        intervals = intervals.filter(i => (parseInt(i.split("-")[0].split(":")[0]) >= 9 && parseInt(i.split("-")[1].split(":")[0]) < 15) || i.split("-")[1] == "15:00")
+    } else {
+        intervals = intervals.filter(i => (parseInt(i.split("-")[0].split(":")[0]) >= 9 && parseInt(i.split("-")[1].split(":")[0]) < 18) || i.split("-")[1] == "18:00")
+    }
+
     $('.grid-container').empty();
-    filteredIntervals.forEach(i => {
+    intervals.forEach(i => {
         let slot = document.createElement("div");
         slot.setAttribute("class", "grid-item")
         let node = document.createTextNode(i);
@@ -265,7 +276,7 @@ function regenerate() {
         curDay.appendChild(node);
         curDay.addEventListener('click', makeActive);
         days.appendChild(curDay);
-        if (today.getDate() == i) {
+        if (i === 1) {
             let span = document.createElement("span");
             span.setAttribute("class", "active");
             var t = document.createTextNode(i);
