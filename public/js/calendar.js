@@ -161,8 +161,10 @@ function generateHours() {
         grid.addEventListener('click', select);
     })
     pickATime.innerHTML = "Pick a Time";
+    submitButton.disabled = false;
     if (selectedDay.getDay() === 0) {
         pickATime.innerHTML = "Store closed on Sunday"
+        submitButton.disabled = true;
     }
 
 
