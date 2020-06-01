@@ -192,12 +192,12 @@ function prevMonth() { // changes current month to the previous one
     monthYear.childNodes[0].textContent = months[curMonth];
     year.innerHTML = curYear;
     monthsIn--;
+    regenerate()
 }
 
 
 
 function nextMonth() {
-    log(3)
     if (monthsIn === 3) {
         return;
     }
@@ -241,8 +241,39 @@ function makeActive(e) {
 }
 
 function regenerate() {
-    log(monthYear.childNodes[0].textContent);
+    //log(monthYear.childNodes[0].textContent);
     days.innerHTML = "";
+    var firstDayOfSelectedMonth = new Date(year.innerHTML, months.indexOf(monthYear.childNodes[0].textContent), 1);
+    //log(firstDayOfSelectedMonth);
+    var totalDays = daysInMonth(firstDayOfSelectedMonth.getMonth() + 1, firstDayOfSelectedMonth.getFullYear());
+    var rightShifts = firstDayOfSelectedMonth.getDay();
+    log(rightShifts)
+    if (rightShifts === 0) {
+        rightShifts = 6;
+    } else {
+        rightShifts--;
+    }
+    for (let j = 0; j < rightShifts; j++) {
+        let curDay = document.createElement("li");
+        var node = document.createTextNode("")
+        curDay.appendChild(node);
+        days.appendChild(curDay);
+    }
+    for (let i = 1; i < totalDays + 1; i++) {
+        let curDay = document.createElement("li");
+        var node = document.createTextNode(i)
+        curDay.appendChild(node);
+        curDay.addEventListener('click', makeActive);
+        days.appendChild(curDay);
+        if (today.getDate() == i) {
+            let span = document.createElement("span");
+            span.setAttribute("class", "active");
+            var t = document.createTextNode(i);
+            span.appendChild(t);
+            curDay.innerHTML = "";
+            curDay.appendChild(span);
+        }
+    }
     // var someDate = // get month and year from innerHTML of DOM, then recreate all days
 }
 
