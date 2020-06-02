@@ -6,7 +6,8 @@ body {font-family: Verdana, sans-serif;}
   margin-top: 20px;
   padding: 70px 25px;
   width: 100%;
-  background: #1abc9c;
+  /*background: #1abc9c;*/
+  background: #bd154d;
   text-align: center;
 }
 
@@ -71,7 +72,8 @@ body {font-family: Verdana, sans-serif;}
 
 .days li .active {
   padding: 5px;
-  background: #1abc9c;
+/*  background: #1abc9c;*/
+  background: #bd154d;
   color: white !important
 }
 
@@ -96,7 +98,8 @@ body {font-family: Verdana, sans-serif;}
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
-  background-color: #2196F3; 
+/*  background-color: #2196F3; */
+  background-color: #bd154d;
   padding: 10px;
 }
 .grid-item {
@@ -131,8 +134,10 @@ body {font-family: Verdana, sans-serif;}
   right: 10%;
   top: 30px;
   position: absolute;
-  background-color: red;
-  color: white;
+/*  background-color: red;*/
+  background-color: white;
+/*  color: white;*/
+  color: #bd154d;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
@@ -200,7 +205,8 @@ body {font-family: Verdana, sans-serif;}
 
 /* When the checkbox is checked, add a blue background */
 .container-checkbox input:checked ~ .checkmark {
-  background-color: #2196F3;
+  /*background-color: #2196F3;*/
+  background-color: #bd154d;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -226,7 +232,7 @@ body {font-family: Verdana, sans-serif;}
 }
 
 #submit-button {
-  background-color: green;
+  background-color: #bd154d;
   border-radius: 7%;
   margin-left: 15px;
   margin-top: 15px;

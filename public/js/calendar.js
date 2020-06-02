@@ -19,6 +19,20 @@ var curbSideSlot = [];
 
 const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
+const arr = [1, 3, 2, 4, 1, 3, 2, 6, 5, 1];
+
+var occ = arr.reduce((o, v) => {
+    if (typeof o[v] === "undefined") {
+        o[v] = 1;
+    }else {
+            o[v] = o[v];
+    }
+    return o;
+})
+log(typeof occ)
+// var dup = Object.keys(occ).filter(k => k.count > 2);
+// log(dup)
+
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -345,7 +359,7 @@ function regenerate() {
         let curDay = document.createElement("li");
         var node = document.createTextNode(i)
         curDay.appendChild(node);
-        if (isThisMonth && today.getDate() <= i) { // 10 is a placeholder for debugging, use today.getDate()
+        if (isThisMonth && today.getDate() > i) { // 10 is a placeholder for debugging, use today.getDate()
             curDay.style.backgroundColor = "black";
             
 
@@ -492,11 +506,6 @@ function fetchAppointments() {
     })
     
 };
-
-
-
-
-
 
 function deleteAppointments() { // for debugging purposes only!!!!!!!!!!
     const url = "/appointments"
