@@ -138,7 +138,7 @@ function generateHours() {
     var interval;
     var maxIndex;
 
-    if (curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "In-store pickup" || curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Injection") {
+    if (curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "In-store pickup" || curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Injection"|| curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Curb-side pickup") {
         hourInterval = halfIndex;
         maxIndex = 1;
     } else {
@@ -208,14 +208,17 @@ function generateHours() {
     pickupSlot = slotsTakenToday.filter(slot => slot.type === "In-store pickup");
     curbSideSlot = slotsTakenToday.filter(slot => slot.type === "Curb-side pickup");
 
-    
+
+
     injectionSlot = injectionSlot.map(slot => slot.time);
     curbSideSlot = curbSideSlot.map(slot => slot.time);
     pickupSlot = pickupSlot.map(slot => slot.time);
+
+    var oldPickupSlot = pickupSlot;
     
     curbSideSlot = curbSideSlot.filter((a, i, aa) => aa.indexOf(a) === i && aa.lastIndexOf(a) !== i);
     pickupSlot = pickupSlot.filter((a, i, aa) => aa.indexOf(a) === i && aa.lastIndexOf(a) !== i);
-    log(injectionSlot, pickupSlot, curbSideSlot);
+    log(injectionSlot, pickupSlot, curbSideSlot, oldPickupSlot);
 
     let option = curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
     $('.grid-container').empty();
@@ -226,8 +229,12 @@ function generateHours() {
         let node = document.createTextNode(i);
         slot.appendChild(node);
         grid.appendChild(slot);
+        log(i, oldPickupSlot[0])
         if ((option === "Curb-side pickup" && curbSideSlot.includes(i)) || ((option === "In-store pickup" || option === "Injection") && (pickupSlot.includes(i) || injectionSlot.includes(i)))) {
             log("found it!")
+            slot.style.backgroundColor = "grey";
+        }
+        else if (option === "Injection" && oldPickupSlot.includes(i)) { // 1 in-store pickup prevents injection appointment
             slot.style.backgroundColor = "grey";
         }
         else {
@@ -368,7 +375,15 @@ function regenerate() {
         }
 
         days.appendChild(curDay);
-        if (i === 1) {
+        if (isThisMonth && i == today.getDate()) {
+            let span = document.createElement("span");
+            span.setAttribute("class", "active");
+            var t = document.createTextNode(i);
+            span.appendChild(t);
+            curDay.innerHTML = "";
+            curDay.appendChild(span);
+        }
+        else if (!isThisMonth && i === 1) {
             let span = document.createElement("span");
             span.setAttribute("class", "active");
             var t = document.createTextNode(i);
@@ -496,7 +511,7 @@ function fetchAppointments() {
             let type;
             let slot = {
                 time: a.start + "-" + a.finish,
-                date: new Date(reconstructedDate[2], reconstructedDate[0], reconstructedDate[1]),
+                date: new Date(reconstructedDate[2], reconstructedDate[0] - 1, reconstructedDate[1]),
                 type: a.option
             }
             slotsTaken.push(slot)
@@ -525,7 +540,7 @@ function deleteAppointments() { // for debugging purposes only!!!!!!!!!!
     })
 }
 
-// deleteAppointments() // comment out if you wish to clear the appointments database
+// deleteAppointments() // erase comment only if you wish to clear the appointments database
 
 fetchAppointments();
 
