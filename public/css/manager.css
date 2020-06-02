@@ -1,5 +1,5 @@
 ul {list-style-type: none;}
-body {font-family: Verdana, sans-serif;}
+body {font-family: Verdana, sans-serif; width: 150%; background-color: grey;}
 
 .main-container {
   margin: 15px 15px;
@@ -7,14 +7,35 @@ body {font-family: Verdana, sans-serif;}
 }
 
 .suggestions-table {
-
-
   border: 1px double black;
 }
 
+.table-container {
+    border: 3px double black;
+
+  margin-left: 15px;
+}
+
+
+.container-1 {
+  float: left;
+}
+
+.container-2 {
+  float: left;
+}
+
+.container-3 {
+  float: left;
+}
+
 .suggestion-container {
-  margin-right: 8%;
-  float: right;
+  margin-left: 3%;
+  float: left;
+}
+
+table {
+
 }
 
 table * {
@@ -24,6 +45,10 @@ table * {
 .appointment-table {
   float: left;
   border: 1px double black;
+}
+
+.button-row {
+  margin-left: 30px;
 }
 
 tr {

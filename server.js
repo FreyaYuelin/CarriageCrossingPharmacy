@@ -69,10 +69,11 @@ app.post('/index/auth', (req, res) => {
 app.post('/appointment', (req, res) => {
   
   log(req.body);
-  var month = months.indexOf(req.body.month);
+  var month = months.indexOf(req.body.month) + 1;
   var year = req.body.year;
   var day = req.body.day;
   let reformattedDate = month.toString() + "-" + day + "-" + year;
+  log(reformattedDate)
   var queryString = 'INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
   pool.query(queryString, [req.body.email, reformattedDate, req.body.start, req.body.finish, req.body.option, req.body.specialConsiderations, "6955 Fielding", "123-456-7890"], (err, resp) => {
     log(err, resp);
