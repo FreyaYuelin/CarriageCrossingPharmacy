@@ -98,7 +98,17 @@ app.delete('/appointments', function (req, res) { // clear all appointments
   res.status(200).send()
 })
 
-
+app.post('/users', (req, res) => { // create user
+  pool.query('INSERT INTO users(email, phone, address) VALUES($1, $2, $3)', [req.body.email, req.body.phone, req.body.address], (err, resp) => {
+    if (err) {
+      return console.error('Error executing query', err.stack)
+    }
+    else {
+      log(resp);
+    }
+  })
+  res.status(200).send()
+})
 
 
 
