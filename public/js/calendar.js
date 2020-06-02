@@ -10,8 +10,12 @@ const deliverySchedule = {
     "Delivery": 15
 }
 
-var appointments;
+var appointments; // server variables
 var slotsTaken = [];
+var optionSlot = [];
+var injectionSlot = [];
+var pickupSlot = [];
+var curbSideSlot = [];
 
 const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -120,7 +124,7 @@ function generateHours() {
     var interval;
     var maxIndex;
 
-    if (curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "In-store consulting" || curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Injection") {
+    if (curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "In-store pickup" || curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Injection") {
         hourInterval = halfIndex;
         maxIndex = 1;
     } else {
@@ -183,17 +187,40 @@ function generateHours() {
         }
     }
 
-    log(slotsTaken)
+    log(selectedDay, slotsTaken)
+    var slotsTakenToday = slotsTaken.filter(slot => datesAreOnSameDay(slot.date, selectedDay))
+    log(slotsTakenToday)
+    injectionSlot = slotsTakenToday.filter(slot => slot.type === "Injection");
+    pickupSlot = slotsTakenToday.filter(slot => slot.type === "In-store pickup");
+    curbSideSlot = slotsTakenToday.filter(slot => slot.type === "Curb-side pickup");
 
+    
+    injectionSlot = injectionSlot.map(slot => slot.time);
+    curbSideSlot = curbSideSlot.map(slot => slot.time);
+    pickupSlot = pickupSlot.map(slot => slot.time);
+    
+    curbSideSlot = curbSideSlot.filter((a, i, aa) => aa.indexOf(a) === i && aa.lastIndexOf(a) !== i);
+    pickupSlot = pickupSlot.filter((a, i, aa) => aa.indexOf(a) === i && aa.lastIndexOf(a) !== i);
+    log(injectionSlot, pickupSlot, curbSideSlot);
 
+    let option = curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
     $('.grid-container').empty();
     intervals.forEach(i => {
+        
         let slot = document.createElement("div");
         slot.setAttribute("class", "grid-item")
         let node = document.createTextNode(i);
         slot.appendChild(node);
         grid.appendChild(slot);
-        grid.addEventListener('click', select);
+        if ((option === "Curb-side pickup" && curbSideSlot.includes(i)) || ((option === "In-store pickup" || option === "Injection") && (pickupSlot.includes(i) || injectionSlot.includes(i)))) {
+            log("found it!")
+            slot.style.backgroundColor = "grey";
+        }
+        else {
+            slot.addEventListener('click', select);
+        }
+
+        
     })
     pickATime.innerHTML = "Pick a Time";
     submitButton.disabled = false;
@@ -452,9 +479,11 @@ function fetchAppointments() {
                 reconstructedDate[i] = parseInt(reconstructedDate[i])
             }
             log(reconstructedDate)
+            let type;
             let slot = {
                 time: a.start + "-" + a.finish,
-                date: new Date(reconstructedDate[2], reconstructedDate[0], reconstructedDate[1])
+                date: new Date(reconstructedDate[2], reconstructedDate[0], reconstructedDate[1]),
+                type: a.option
             }
             slotsTaken.push(slot)
         })
@@ -487,7 +516,7 @@ function deleteAppointments() { // for debugging purposes only!!!!!!!!!!
     })
 }
 
-// deleteAppointments()
+// deleteAppointments() // comment out if you wish to clear the appointments database
 
 fetchAppointments();
 

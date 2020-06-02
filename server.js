@@ -69,7 +69,7 @@ app.post('/index/auth', (req, res) => {
 app.post('/appointment', (req, res) => {
   
   log(req.body);
-  var month = months.indexOf(req.body.month) + 1;
+  var month = months.indexOf(req.body.month);
   var year = req.body.year;
   var day = req.body.day;
   let reformattedDate = month.toString() + "-" + day + "-" + year;
