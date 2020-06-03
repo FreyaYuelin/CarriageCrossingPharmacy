@@ -2,68 +2,31 @@ const log = console.log;
 
 var myStorage = window.localStorage;
 
-const refillLoginForm = document.getElementById('refillLoginForm');
-// refillLoginForm.addEventListener('submit', logIn);
+const quickRefillContainer = document.querySelector('.quickRefillContainer');
+quickRefillContainer.addEventListener('submit', logUser);
 
 const quickRefill = document.querySelector('#quickRefill');
-quickRefill.addEventListener('click', foo);
+// quickRefill.addEventListener('click', register);
 
 const quickEmail = document.querySelector('#quick-email');
 
+const registerEmail = document.querySelector('#email')
+const registerPhone = document.querySelector('#phone')
+const registerAddress = document.querySelector('#address')
 
 const user1 = {
     uname: "david",
     pwd: "liu"
 }
 
-function foo(e) {
-    //e.preventDefault();
-    localStorage.setItem('email', quickEmail.value)
-    log(localStorage.getItem('email'))
+function logUser() { // not very useful
+	// var u = fetchUser(quickEmail.value)
+	// log(u)
+	localStorage.setItem('email', quickEmail.value)
+
+	// localStorage.set('phone', registerPhone.phone)
+	// localStorage.set('address', registerAddress.address)
 }
 
- // function foo(e) {
- //    e.preventDefault();
- //    const url = "/index/auth";
- //    const data = {
- //        uname: document.getElementById("uname").value,
- //        pwd: document.getElementById("pwd").value
- //    }
- //    const request = new Request(url, {
- //        method: "POST",
- //        body: JSON.stringify(data),
- //        headers: {
- //            'Accept': 'application/json, text/plain, */*',
- //            'Content-Type': 'application/json'
- //        },
- //    });
- //    fetch(request)
- //    .then((res) => {
- //        log(res.status)
- //        if (res.status === 200) {
- //        } else {
- //            alert("Incorrect user name or password")
- //        }
- //    }).catch((error) => {
- //        console.error(error)
- //    })
- // }
 
 
-// function logIn(e) {
-//     e.preventDefault()
-//     // const url = "/user/index"
-//     const data = {
-//         uname: document.getElementById("uname").value,
-//         pwd: document.getElementById("pwd").value
-//     }
-//     log(data.uname);
-//     if (data.uname === user1.uname && data.pwd === user1.pwd) {
-//         localStorage.setItem('uname', data.uname);
-//         window.location.href = "selections.html";
-//     }
-//     else {
-//         window.alert('wrong username or password!');
-//     }
-
-// }

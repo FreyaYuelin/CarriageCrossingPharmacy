@@ -75,7 +75,7 @@ app.post('/appointment', (req, res) => {
   let reformattedDate = month.toString() + "-" + day + "-" + year;
   log(reformattedDate)
   var queryString = 'INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
-  pool.query(queryString, [req.body.email, reformattedDate, req.body.start, req.body.finish, req.body.option, req.body.specialConsiderations, "6955 Fielding", "123-456-7890"], (err, resp) => {
+  pool.query(queryString, [req.body.email, reformattedDate, req.body.start, req.body.finish, req.body.option, req.body.specialConsiderations, req.body.address, req.body.phone], (err, resp) => {
     log(err, resp);
 
   })
@@ -85,6 +85,9 @@ app.post('/appointment', (req, res) => {
 
 app.get('/appointments', (req, res) => { // fetch all scheduled appointments
   pool.query('SELECT * FROM appointments', (err, resp) => {
+    if (err) {
+      console.error('error', err.stack)
+    }
     res.status(200).json(resp.rows)
   })
 })
@@ -99,6 +102,7 @@ app.delete('/appointments', function (req, res) { // clear all appointments
 })
 
 app.post('/users', (req, res) => { // create user
+  log(req.body)
   pool.query('INSERT INTO users(email, phone, address) VALUES($1, $2, $3)', [req.body.email, req.body.phone, req.body.address], (err, resp) => {
     if (err) {
       return console.error('Error executing query', err.stack)
@@ -107,10 +111,23 @@ app.post('/users', (req, res) => { // create user
       log(resp);
     }
   })
-  res.status(200).send()
+  log("done")
+  res.status(200).redirect('/')
 })
 
+app.get('/users/:email', (req, res) => { // find user by email
+  let email = req.params.email;
+  log(email)
+  var user;
+  pool.query('SELECT * FROM users WHERE email = $1' , [email], (err, resp) => {
+    log(resp.rows[0])
+    user = resp.rows;
+    res.status(200).send(resp.rows)
+  })
+  
+})
 
+// 
 
 
 
