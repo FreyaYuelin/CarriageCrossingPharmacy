@@ -19,6 +19,8 @@ const pool = new Pool({
 
 const app = express();
 
+var router = express.Router();
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use("/js", express.static(__dirname + '/public/js'))
 app.use("/css", express.static(__dirname + '/public/css'))
@@ -46,6 +48,14 @@ app.get('/', (req, res) => {
 
 app.get('/calendar', (req, res) => {
     res.sendFile(__dirname + '/public/calendar.html');
+})
+
+app.get('/contact', (req, res) => {
+    res.sendFile(__dirname + '/public/contactPage.html');
+})
+
+app.get('/manager', (req, res) => {
+    res.sendFile(__dirname + '/public/manager.html');
 })
 
 
@@ -125,6 +135,31 @@ app.get('/users/:email', (req, res) => { // find user by email
     res.status(200).send(resp.rows)
   })
   
+})
+
+app.post('/suggestions', (req, res) => {
+  log(req.body);
+  pool.query('INSERT INTO feedbacks(name, email, phone, message) VALUES($1, $2, $3, $4)', [req.body.name, req.body.email, req.body.phone, req.body.message], (err, resp) => {
+    if (err) {
+      return console.error('Error executing query', err.stack)
+    }
+    else {
+      log(resp);
+    }
+  })
+  res.status(200).redirect('/');
+})
+
+app.get('/suggestions', (req, res) => {
+  pool.query('SELECT * FROM feedbacks', (err, resp) => {
+    if (err) {
+      res.status(500).send()
+    }
+    else {
+      res.status(200).send(resp.rows)
+
+    }
+  })
 })
 
 // 
