@@ -1,5 +1,5 @@
 ul {list-style-type: none;}
-body {font-family: Verdana, sans-serif; width: 170%; background-color: grey;}
+body {font-family: Verdana, sans-serif; width: 200%; background-color: grey;}
 
 .main-container {
   margin: 15px 15px;
@@ -26,6 +26,10 @@ body {font-family: Verdana, sans-serif; width: 170%; background-color: grey;}
 }
 
 .container-3 {
+  float: left;
+}
+
+.container-4 {
   float: left;
 }
 
