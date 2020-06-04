@@ -1,10 +1,11 @@
 ul {list-style-type: none;}
-body {font-family: Verdana, sans-serif;}
+body {font-family: Verdana, sans-serif; background-color: #d9cace;}
 
 
 #refillLoginForm {
   margin-top: 20px;
 }
+
 
 
 #quickRefill {
@@ -15,7 +16,7 @@ body {font-family: Verdana, sans-serif;}
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   border-radius: 50%;
   margin: 20px 30%;
 }
@@ -27,6 +28,7 @@ body {font-family: Verdana, sans-serif;}
   width: 200px;
   margin-left: 25%;
   text-align: center;
+  font-size: 16;
 }
 
 #normalRefill {

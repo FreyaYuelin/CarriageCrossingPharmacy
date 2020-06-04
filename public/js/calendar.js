@@ -10,7 +10,7 @@ const considerations = document.querySelector("#special-considerations");
 const deliverySchedule = {
     "Curb-side pickup": 15,
     "In-store pickup": 15,
-    "In-store consulting": 30,
+    "Consultation": 30,
     "Injection": 30,
     "Delivery": 15
 }
@@ -22,7 +22,7 @@ var injectionSlot = [];
 var pickupSlot = [];
 var curbSideSlot = [];
 
-var deliverySlot = ["11:00-11:30", "11:30-12:00", "12:00-12:30", "12-30:13:00", "13:00-13:30", "13:30-14:00", "5:30-6:00", "6:00-6:30", "6:30-7:00", "7:00-7:30", "7:30-8:00", "8:00-8:30"];
+var deliverySlot = ["11:00-11:30", "11:30-12:00", "12:00-12:30", "12-30:13:00", "13:00-13:30", "13:30-14:00", "17:30-18:00", "18:00-18:30", "18:30-19:00", "19:00-19:30", "19:30-20:00", "20:00-20:30"];
 
 const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -172,8 +172,12 @@ var userObj = new Object();
             return res.json();
         } else {
             alert(res.status)
+            window.location.href = '/';
         }
     }).then(data => {
+        if (typeof data[0] === 'undefined') {
+            window.location.href = '/';
+        }
         userObj.email = data[0].email;
         userObj.phone = data[0].phone;
         userObj.address = data[0].address;
@@ -191,7 +195,7 @@ function generateHours() {
     var interval;
     var maxIndex;
 
-    if (curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "In-store pickup" || curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Injection"|| curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Curb-side pickup") {
+    if (curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "In-store pickup" || curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Injection"|| curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Curb-side pickup" || curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim() === "Consultation") {
         hourInterval = halfIndex;
         maxIndex = 1;
     } else {
@@ -210,12 +214,16 @@ function generateHours() {
         interval = interval + "-" + hours[hourIndex] + ":" + hourInterval[quarterIndex];
         intervals.push(interval);
     }
-
-    log(intervals[14].split("-")[0].split(":")[0], today.getHours());
+    let option = curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
+    if (option === "Delivery") {
+        intervals = deliverySlot;
+    }
     if (months.indexOf(monthYear.childNodes[0].textContent) === today.getMonth() && parseInt(year.innerHTML) === today.getFullYear() && parseInt(days.querySelector(".active").innerHTML) === today.getDate()) {
+
         const filteredIntervals = intervals.filter(i => {
             let h = parseInt(i.split("-")[0].split(":")[0]);
             let m = parseInt(i.split("-")[0].split(":")[1]);
+            log(today.getHours(), h)
             if (today.getHours() + 1 < h) {
                 return i;
             } else if (today.getHours() + 1 === h) {
@@ -228,6 +236,7 @@ function generateHours() {
         })
         intervals = filteredIntervals;
     }
+
     var selectedDay = new Date(year.innerHTML, months.indexOf(monthYear.childNodes[0].textContent), parseInt(days.querySelector(".active").innerHTML));
     log(selectedDay.getDay())
     if (selectedDay.getDay() === 0) { // Sunday
@@ -236,7 +245,7 @@ function generateHours() {
 
     else if (selectedDay.getDay() === 6) { // Saturday
         intervals = intervals.filter(i => (parseInt(i.split("-")[0].split(":")[0]) >= 9 && parseInt(i.split("-")[1].split(":")[0]) < 15) || i.split("-")[1] === "15:00")
-    } else {
+    } else if (option !== "Delivery") {
         intervals = intervals.filter(i => (parseInt(i.split("-")[0].split(":")[0]) >= 9 && parseInt(i.split("-")[1].split(":")[0]) < 18) || i.split("-")[1] === "18:00")
     }
 
@@ -276,11 +285,9 @@ function generateHours() {
     log(curbSideSlot)
 
 
-    let option = curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
+    
     $('.grid-container').empty();
-    if (option === "Delivery") {
-        intervals = deliverySlot;
-    }
+
     intervals.forEach(i => {
         
         let slot = document.createElement("div");
@@ -290,7 +297,6 @@ function generateHours() {
         grid.appendChild(slot);
         //log(i, oldPickupSlot[0])
         if ((option === "Curb-side pickup" && curbSideSlot.includes(i)) || ((option === "In-store pickup" || option === "Injection") && (pickupSlot.includes(i) || injectionSlot.includes(i)))) {
-            //log("found it!")
             slot.style.backgroundColor = "grey";
         }
         else if (option === "Injection" && oldPickupSlot.includes(i)) { // 1 in-store pickup prevents injection appointment
@@ -533,8 +539,9 @@ function record(e) {
     });
     fetch(request).then((res) => {
         if (res.status === 200) {
-            log('success')
-            // localStorage.clear() clears user login info
+            localStorage.clear() // clears user login info
+            window.location.href='/';
+            window.alert("Successfully Scheduled!")
         } else {
             alert(res.status)
         }

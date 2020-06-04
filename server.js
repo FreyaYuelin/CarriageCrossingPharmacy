@@ -55,8 +55,27 @@ app.get('/contact', (req, res) => {
 })
 
 app.get('/manager', (req, res) => {
+    res.sendFile(__dirname + '/public/managerLogin.html');
+});
+
+app.get('/faq', (req, res) => {
+    res.sendFile(__dirname + '/public/faq.html');
+});
+
+app.get('/covid', (req, res) => {
+    res.redirect('https://pharmasave.com/caring-for-our-community/');
+});
+
+app.post('/managerAuthenticated', (req, res) => {
+  log(1)
+  log(req.body, req.params)
+  if (req.body.username === "user" && req.body.pwd === "user") {
     res.sendFile(__dirname + '/public/manager.html');
-})
+  }
+  else {
+    res.redirect('/')
+  }
+});
 
 
 app.post('/index/auth', (req, res) => {
@@ -86,6 +105,9 @@ app.post('/appointment', (req, res) => {
   log(reformattedDate)
   var queryString = 'INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
   pool.query(queryString, [req.body.email, reformattedDate, req.body.start, req.body.finish, req.body.option, req.body.specialConsiderations, req.body.address, req.body.phone], (err, resp) => {
+    if (err) {
+      res.status(500).send(err)
+    }
     log(err, resp);
 
   })
@@ -103,12 +125,24 @@ app.get('/appointments', (req, res) => { // fetch all scheduled appointments
 })
 
 
-app.delete('/appointments', function (req, res) { // clear all appointments
-  pool.query('DELETE FROM appointments', (err, resp) => {
-    log(err, resp)
+// app.delete('/appointments', function (req, res) { // clear all appointments
+//   pool.query('DELETE FROM appointments', (err, resp) => {
+//     log(err, resp)
+//   })
+
+//   res.status(200).send()
+// })
+
+app.delete('/appointments', (req, res) => {
+  pool.query('DELETE FROM appointments WHERE id=$1', [req.body.id], (err, resp) => {
+    if (err) {
+      res.status(500).send()
+    }
+    else {
+      res.status(200).send()
+    }
   })
 
-  res.status(200).send()
 })
 
 app.post('/users', (req, res) => { // create user
@@ -121,7 +155,6 @@ app.post('/users', (req, res) => { // create user
       log(resp);
     }
   })
-  log("done")
   res.status(200).redirect('/')
 })
 
@@ -130,6 +163,9 @@ app.get('/users/:email', (req, res) => { // find user by email
   log(email)
   var user;
   pool.query('SELECT * FROM users WHERE email = $1' , [email], (err, resp) => {
+    if (err) {
+      res.status(400).send()
+    }
     log(resp.rows[0])
     user = resp.rows;
     res.status(200).send(resp.rows)
@@ -158,6 +194,30 @@ app.get('/suggestions', (req, res) => {
     else {
       res.status(200).send(resp.rows)
 
+    }
+  })
+})
+
+app.delete('/suggestions', (req, res) => {
+  log(req.body.id)
+  pool.query('DELETE FROM feedbacks WHERE id=$1', [req.body.id], (err, resp) => {
+    if (err) {
+      res.status(500).send()
+    }
+    else {
+      res.status(200).send()
+    }
+  })
+})
+
+
+app.patch('/appointments', (req, res) => {
+  pool.query('UPDATE appointments SET date=$2, start=$3, finish=$4 WHERE id=$1', [req.body.id, req.body.date, req.body.start, req.body.finish], (err, resp) => {
+    if (err) {
+      res.status(500).send()
+    }
+    else {
+      res.status(200).send()
     }
   })
 })

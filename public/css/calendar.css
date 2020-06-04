@@ -1,6 +1,6 @@
 * {box-sizing: border-box;}
 ul {list-style-type: none;}
-body {font-family: Verdana, sans-serif;}
+body {font-family: Verdana, sans-serif; background-color: #d9cace;}
 
 .month {
   margin-top: 20px;
@@ -62,8 +62,9 @@ body {font-family: Verdana, sans-serif;}
   width: 13.6%;
   text-align: center;
   margin-bottom: 5px;
-  font-size:12px;
+  font-size:14px;
   color: #777;
+  padding-top: 5px;
 }
 
 .days li:hover {
@@ -132,7 +133,7 @@ body {font-family: Verdana, sans-serif;}
 .modal-content {
   /* display: none;  temporary, needs to be removed */
   right: 10%;
-  top: 30px;
+  top: 0px;
   position: absolute;
 /*  background-color: red;*/
   background-color: white;

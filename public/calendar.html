@@ -6,18 +6,21 @@
     <title>Calendar</title>
   </head>
 </body>
-  <div class="topnav">
-  <a href="#home">HOME</a>
-  <a href="#news">NEWS</a>
-  <a href="#contact">CONTACT</a>
-  <a href="#about">ABOUT</a>
-  </div>
+<div class="topnav">
+  <a href="https://pharmasave.com/store/pharmasave-carriage-crossing-pharmacy/">Pharmasave HomePage</a>
+  <a href="/">Index</a>
+  <a class="active" href="contact">Contact us</a>
+  <a href="faq">FAQ</a>
+  <a href="covid">COVID-19 HELP PAGE</a>
+  <a href="manager">Manager</a>
+</div>
 
   <div class="modal-content">
     <span class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-    <p>Some more text...</p>
-    <p>And some more...</p>
+    <p>Protecting the health, safety and wellbeing of Pharmasave customers and staff is always our highest priority, but particularly during the rapidly evolving COVID-19 health situation.</p>
+    <p>If you have any of the following symptoms, please do not visit the pharmacy.</p>
+    <p>Fever or chills</br> Cough or trouble breathing</br>Fatigue</br>Muscle or body aches</br>Headache</br>New loss of taste or smell</br>Sore throat</br>Congestion or runny nose</br>Nausea or vomiting</br>Diarrhea</p>
+    <p>Please confirm:</p>
     <p><button id="modal-button" type="button">Yes</button>
       <button id="modal-button" type="button">No</button></p>
 
@@ -49,7 +52,7 @@
 
 </ul>
 <div id="activities">
-  <p><h3>Choose an option (Injections must be scheduled 24 hrs prior)</h3></p>
+  <p><h3>Choose an option (Injections must be scheduled 24 hrs prior) (Deliveries may not be accurate to the half hour interval)</h3></p>
 <label class="container-checkbox">Curb-side pickup
   <input type="radio" name="radio">
   <span class="checkmark"></span>
@@ -58,7 +61,11 @@
   <input type="radio" name="radio">
   <span class="checkmark"></span>
 </label>
-<label class="container-checkbox">In-store consulting
+<label class="container-checkbox">Delivery
+  <input type="radio" name="radio">
+  <span class="checkmark"></span>
+</label>
+<label class="container-checkbox">Consultation
   <input type="radio" checked="checked" name="radio">
   <span class="checkmark"></span>
 </label>
@@ -66,10 +73,7 @@
   <input type="radio" name="radio">
   <span class="checkmark"></span>
 </label>
-<label class="container-checkbox">Delivery
-  <input type="radio" name="radio">
-  <span class="checkmark"></span>
-</label>
+
 
 </div>
 
@@ -77,7 +81,8 @@
 <div class="grid-container">
 
 </div>
-<textarea id="special-considerations" rows="15" cols="50" style="resize: none; padding-top: 3px; margin-top: 30px;" placeholder="Please put in any special considerations"></textarea>
+<h2>Special Considerations</h2>
+<textarea id="special-considerations" rows="15" cols="80" style="resize: none; padding-top: 3px; margin-top: 30px; font-size: 14" placeholder="Please put in any special considerations(max 500 characters)"></textarea>
   <button id="submit-button" type="button">Submit</button>
     <script type="text/javascript" src="js/calendar.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

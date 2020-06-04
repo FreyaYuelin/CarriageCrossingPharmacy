@@ -12,8 +12,6 @@ const info = document.querySelector('#info')
 
 const suggestionTable = document.querySelector(".suggestions-table")
 
-log(suggestionTable.childNodes[1].childNodes[2].childNodes[0])
-
 
 
 // Instructions: 
@@ -112,10 +110,42 @@ function addItem(item) {
   }
 }
 
+function customerInfo(item) {
+  let row=document.createElement("tr")
+  let td1=document.createElement("td")
+  let td2=document.createElement("td")
+  let td3=document.createElement("td")
+  let td4=document.createElement("td")
+  let td5=document.createElement("td")
+  let td6=document.createElement("td")
+  td1.innerHTML=item.id
+  td2.innerHTML=item.name
+  td3.innerHTML=item.email
+  td4.innerHTML=item.phone
+  let b5 = document.createElement("button")
+  b5.setAttribute("id", "view-button");
+  b5.setAttribute("type", "button");
+  b5.addEventListener('click', viewMessage)
+  b5.innerHTML="View"
+  let b6 = document.createElement("button")
+  b6.setAttribute("id", "remove-button");
+  b6.setAttribute("type", "button");
+  b6.addEventListener('click', removeElement)
+  b6.innerHTML="Remove"
+  td5.appendChild(b5)
+  td6.appendChild(b6)
+  row.appendChild(td1)
+  row.appendChild(td2)
+  row.appendChild(td3)
+  row.appendChild(td4)
+  row.appendChild(td5)
+  row.appendChild(td6)
+  suggestionTable.appendChild(row)
+}
+
 
 function makeEditable(e) {
   e.preventDefault()
-  log(e.target.parentElement.parentElement)
   let buttonSlot = e.target.parentElement;
   var tr = e.target.parentElement.parentElement;
   for (let i = 1; i < 4; i++) {
@@ -142,22 +172,78 @@ function saveChanges(e) { // sends update request to server, updating single app
   for (let i = 1; i < 4; i++) {
     tr.childNodes[i].contentEditable = false;
   }
+  let par = e.target.parentElement.parentElement
   buttonSlot.removeChild(e.target);
   buttonSlot.appendChild(edit)
+  let url = "/appointments";
+  let body = {
+    id: par.childNodes[0].innerHTML,
+    date: par.childNodes[1].innerHTML,
+    start: par.childNodes[2].innerHTML,
+    finish: par.childNodes[3].innerHTML
+  }
+  
+  log(body)
+  let stringifiedBody = JSON.stringify(body)
+  const request = new Request(url, {
+    method: "PATCH", 
+    body: stringifiedBody,
+    headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+    }
+  });
+  fetch(request).then((res) => {
+    if (res.status === 200) {
+        log("success");
+    } else {
+        alert(res.status)
+    }
+  })
+
 
 }
 
 function viewMessage(e) {
   e.preventDefault();
   var tr = e.target.parentElement.parentElement;
-  var obj = suggestions.filter(s => parseInt(s.id) === tr.childNodes[0].innerHTML)[0]
+  var obj = suggestions.filter(s => parseInt(s.id) === parseInt(tr.childNodes[0].innerHTML))[0]
+
   let infoString = "Message: " + obj.message;
   info.innerHTML = infoString;
 }
 
 function removeElement(e) { // send delete request
   log(e.target.parentElement.parentElement)
+  var removedElement = e.target.parentElement.parentElement;
   e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement)
+  var url;
+
+  if (removedElement.childNodes.length === 6) {
+    url = "/suggestions";
+  }
+  if (removedElement.childNodes.length === 7) {
+    url = '/appointments';
+  }
+  let body = {
+    id: removedElement.childNodes[0].innerHTML
+  }
+  let stringifiedBody = JSON.stringify(body)
+  const request = new Request(url, {
+    method: "DELETE", 
+    body: stringifiedBody,
+    headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+    }
+  });
+  fetch(request).then((res) => {
+    if (res.status === 200) {
+        log("success");
+    } else {
+        alert(res.status)
+    }
+  })
 }
 
 function showInfo(e) {
@@ -207,6 +293,10 @@ function sortItems(arr) {
     }
   }).then(data => {
     suggestions = data;
+    for (item of data) {
+      log(item)
+      customerInfo(item)
+    }
   })
 }());
 
