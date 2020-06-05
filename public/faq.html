@@ -1,7 +1,15 @@
  <html lang="en" style="font-size: 19">
+  <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <!-- Bootstrap scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="css/main.css">
- 	<link rel="stylesheet" type="text/css" href="css/faq.css">
-	<meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="css/faq.css">
+  <meta charset="utf-8">
   <head>
     <title>FAQ</title>
   </head>
@@ -14,20 +22,185 @@
   <a href="covid">COVID-19 HELP PAGE</a>
   <a href="manager">Manager</a>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container-main" style="margin-left: 30px;">
 <h1>FAQ</h1>
-<p><span style="font-weight: bold;">1. So I scheduled an appointment. How do i cancel it?</span></p>
-<p>You will have to call us during office hours for the cancellation.</p>
-<p><span style="font-weight: bold;">2. Do i have to register in order to schedule an appointment with you?</span></p>
-<p>Yes, but you will not need to create a password for your account. It will be stored in our database along with your phone number and address for our use only. No one else will see it.</p>
-<p><span style="font-weight: bold;">3. Will my information be secure with you?</span></p>
-<p>Yes, your information will be secure. We also would not ask you to provide any sensitive personal information, so there is no need to worry about it.</p>
-<p><span style="font-weight: bold;">4. Due to the current situation with the pandemic, will I be able to schedule an online consultation with you?</span></p>
-<p>Yes. You will need to specify in the special consideration textbox that you wish for the meeting to occur online. We will send you further information concerning the consultation via your email or by calling you.</p>
-<p><span style="font-weight: bold;">5. How long in advance should I schedule an appointment with your store?</span></p>
-<p>You may schedule appointments within our office hours one hour in advance except for vaccine injection services, which requires 24 hours for us to prepare for. Our scheduling system will make sure that you do not violate these rules, so as long as you follow the available time slots, you will have nothing to worry about.</p>
+  <div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          1. What options do you have for order pickup?
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+         For order pickup, customers may choose to either come in store, delivery or curbside pickup.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          2. What services can I book via your online scheduling system?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+       We have three ordering services available to customers, including store item order, vaccine injection and consultation.
+       </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          3. How long in advance should I schedule an appointment?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+        It depends on the service you choose. For vaccine injection, please allow 24 hours for us to prepare. For all other services, you may schedule appointments within our office hours one-hour in advance. Our scheduling system will also make sure that you do not violate these rules, so as long as you follow the available time slots, you will have nothing to worry about.
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingFour">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+          4. Do I have to register on your website first to get access to your scheduling system?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+      <div class="card-body">
+        Yes, you need to register first.  But you won’t need to create a password for your account. Customers’ accounts will be stored in our database along with the phone number and address for manage use only.
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingFive">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFIve">
+          5. When can I access the online scheduling system?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+      <div class="card-body">
+        You can access the system 24 hours a day. However, you may only select the time slots that are available for you then.
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingSix">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+          6. Will my information be secure?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+      <div class="card-body">
+        Yes, your information will be secure. The privacy of your information is extremely important to us. The information we collect is completely confidential and securely stored. Also, we would not ask you to provide any sensitive personal information.
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingSeven">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+          7. How can I cancel or edit an order once submitted?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+      <div class="card-body">
+        You must contact us directly during opening hours to edit or cancel your order.
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingEight">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+          8. How can I confirm that I have successfully scheduled?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordion">
+      <div class="card-body">
+        When you successfully submit an appointment request, you should receive a confirmation popup reminding you of all the relevant information that your request has been logged and successfully scheduled. If nothing happens after you click the submit button, your request would not have been procecssed.
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingNine">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+          9. Due to the current situation of Covid-19, can I schedule an online consultation with the pharmacist?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordion">
+      <div class="card-body">
+        Yes, you can. All you need is selecting the ‘Consultation’ service and specifying your demand of online consultation in the special consideration textbox at the bottom of the page. Our pharmacist will contact you via email or by phone later.
+      </div>
+    </div>
+  </div>
+    <div class="card">
+    <div class="card-header" id="headingTen">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+          10. If I have some minor problems about the medications I’m taking, can I communicate with my pharmacist online?
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion">
+      <div class="card-body">
+        Yes, you can. You can either get us a call or schedule a consultation with your pharmacist. Both in-store and virtual consultation are provided at this time. Besides, under the page of ‘Contact Us’, you can fill in your basic information and your message in the textbox. Our pharmacist will reply to you within a short time.
+      </div>
+    </div>
+  </div>
+
 </div>
+
+
+
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 </body>
 </html>

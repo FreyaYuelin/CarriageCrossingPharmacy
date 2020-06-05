@@ -39,6 +39,21 @@ const options = {
   "Four": 4
 }
 
+function isValid(p) {
+  var phoneRe = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
+  var digits = p.replace(/\D/g, "");
+  return phoneRe.test(digits);
+}
+
+function ValidateEmail(mail) 
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return (true)
+  }
+    return (false)
+}
+
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 
@@ -103,8 +118,8 @@ app.post('/appointment', (req, res) => {
   var day = req.body.day;
   let reformattedDate = month.toString() + "-" + day + "-" + year;
   log(reformattedDate)
-  var queryString = 'INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone) VALUES($1, $2, $3, $4, $5, $6, $7, $8)'
-  pool.query(queryString, [req.body.email, reformattedDate, req.body.start, req.body.finish, req.body.option, req.body.specialConsiderations, req.body.address, req.body.phone], (err, resp) => {
+  var queryString = 'INSERT INTO appointments(email, date, start, finish, option, considerations, address, phone, payment) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)'
+  pool.query(queryString, [req.body.email, reformattedDate, req.body.start, req.body.finish, req.body.option, req.body.specialConsiderations, req.body.address, req.body.phone, req.body.payment], (err, resp) => {
     if (err) {
       res.status(500).send(err)
     }
@@ -175,6 +190,10 @@ app.get('/users/:email', (req, res) => { // find user by email
 
 app.post('/suggestions', (req, res) => {
   log(req.body);
+  if (!isValid(req.body.phone) || !ValidateEmail(req.body.email)) {
+    res.status(500).send("Must include a valid phone number and email!");
+  }
+
   pool.query('INSERT INTO feedbacks(name, email, phone, message) VALUES($1, $2, $3, $4)', [req.body.name, req.body.email, req.body.phone, req.body.message], (err, resp) => {
     if (err) {
       return console.error('Error executing query', err.stack)

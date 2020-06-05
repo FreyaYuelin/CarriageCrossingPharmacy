@@ -7,6 +7,14 @@ const curbside = document.querySelector("#curb-side-table");
 const pickup = document.querySelector("#pickup-table");
 const injection = document.querySelector("#injection-table");
 const delivery = document.querySelector("#delivery-table");
+const consultation = document.querySelector("#consultation-table")
+
+var tables = document.querySelectorAll(".appointment-table");
+
+const forecastButton = document.querySelector("#refresh-button")
+// forecastButton.addEventListener('click', forecast)
+const filterButton = document.querySelector("#filter-button")
+filterButton.addEventListener('click', clickForecast)
 
 const info = document.querySelector('#info')
 
@@ -47,6 +55,15 @@ var appt2 = {
   option: "Injection",
   start: "14:30",
   finish: "15:00"
+}
+
+function clearTable(table) {
+  var rows = table.rows;
+  var i = rows.length;
+  while (--i) {
+    rows[i].parentNode.removeChild(rows[i]);
+
+  }
 }
 
 
@@ -105,6 +122,9 @@ function addItem(item) {
   else if (item.option.trim() === "Delivery") {
     delivery.appendChild(row)
   }
+  else if (item.option.trim() === "Consultation") {
+    consultation.appendChild(row)
+  }
   else {
     alert("Unidentified option")
   }
@@ -160,6 +180,11 @@ function makeEditable(e) {
 
 }
 
+function isGoodDate(dt){
+    var reGoodDate = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
+    return reGoodDate.test(dt);
+}
+
 function saveChanges(e) { // sends update request to server, updating single appointment by ID
   e.preventDefault()
   let edit = document.createElement("button")
@@ -169,6 +194,21 @@ function saveChanges(e) { // sends update request to server, updating single app
   edit.innerHTML = "Edit";
   var tr = e.target.parentElement.parentElement;
   var buttonSlot = e.target.parentElement;
+
+  if (!isGoodDate(tr.childNodes[1].innerHTML)) {
+    alert("Date must be valid!");
+    return;
+  }
+  var hourFormat = /^([0-1][0-9]|[2][0-3]):([0-5][0-9])$/;
+  if (!hourFormat.test(tr.childNodes[2].innerHTML)) {
+    alert("Hours must be valid!");
+    return;
+  }
+  if (!hourFormat.test(tr.childNodes[3].innerHTML)) {
+    alert("Hours must be valid!");
+    return;
+  }
+
   for (let i = 1; i < 4; i++) {
     tr.childNodes[i].contentEditable = false;
   }
@@ -204,6 +244,57 @@ function saveChanges(e) { // sends update request to server, updating single app
 
 }
 
+var upcoming;
+
+(function forecast() {
+  var today = new Date();
+
+  const url = "/appointments"
+  const request = new Request(url, {
+      method: "GET", 
+      headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+      }
+  });
+  fetch(request).then((res) => {
+      if (res.status === 200) {
+          return res.json()
+      } else {
+          alert(res.status)
+      }
+  }).then(data => {
+
+      data = sortItems(data)
+
+      upcoming = data.filter(a => a.actualDate.getDate() === today.getDate() + 1)
+      // for (table of tables) {
+      //   clearTable(table)
+      // }
+      log(upcoming)
+      // for (let item of upcoming) {
+      //   addItem(item)
+      // }
+  })
+  // for (item of upcoming) {
+  //   addItem(item)
+  // }
+
+
+}());
+
+function clickForecast() {
+
+  for (table of tables) {
+    clearTable(table)
+  }
+  for (let item of upcoming) {
+    addItem(item)
+  }
+
+
+};
+
 function viewMessage(e) {
   e.preventDefault();
   var tr = e.target.parentElement.parentElement;
@@ -214,7 +305,6 @@ function viewMessage(e) {
 }
 
 function removeElement(e) { // send delete request
-  log(e.target.parentElement.parentElement)
   var removedElement = e.target.parentElement.parentElement;
   e.target.parentElement.parentElement.parentElement.removeChild(e.target.parentElement.parentElement)
   var url;
@@ -249,14 +339,13 @@ function removeElement(e) { // send delete request
 function showInfo(e) {
   e.preventDefault();
   let id = e.target.parentElement.parentElement.childNodes[0].innerHTML;
-  log(e.target.parentElement.parentElement.childNodes[0].innerHTML);
   var list_of_id = appointments.map(a => a.id);
   var obj = appointments.filter(a => a.id === parseInt(id))[0]
   let phone = obj.phone
   let address = obj.address
   let considerations = obj.considerations
   let email = obj.email
-  let infoString = "Email: " + email + ", Address: " + address + ", Special Considerations: " + considerations + ", Phone Number: " + phone;
+  let infoString = "Email: " + email + ", Address: " + address + ", Special Considerations: " + considerations + ", Phone Number: " + phone + ", Payment Prererences: " + obj.payment;
   info.innerHTML = infoString;
 
 }
@@ -294,13 +383,12 @@ function sortItems(arr) {
   }).then(data => {
     suggestions = data;
     for (item of data) {
-      log(item)
       customerInfo(item)
     }
   })
 }());
 
-(function fetchAppointments() {
+function fetchAppointments() {
     const url = "/appointments"
     const request = new Request(url, {
         method: "GET", 
@@ -319,16 +407,60 @@ function sortItems(arr) {
         data = sortItems(data)
         appointments = data;
         let options = appointments.map(a => a.option)
-        log(options)
         for (let item of appointments) {
           addItem(item)
         }
 
     })
     
-}());
+};
 
+fetchAppointments();
 
+function loadChart() {
+  var todaysSlots = upcoming.map(a => a.option.trim())
+  log(todaysSlots);
+  let curbCount = todaysSlots.filter(a => a === "Curb-side pickup").length;
+  let pickupCount = todaysSlots.filter(a => a === "In-store pickup").length;
+  let deliveryCount = todaysSlots.filter(a => a === "Delivery").length;
+  let consultationCount = todaysSlots.filter(a => a === "Consultation").length;
+  let injectionCount = todaysSlots.filter(a => a === "Injection").length;
+  
+  var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    
+    title:{
+      text:"Tomorrow's BI Forecast"
+    },
+    axisX:{
+      title: "Appointment Types",
+      interval: 10
+    },
+    axisY2:{
+      interlacedColor: "#736c6d",
+      gridColor: "rgba(1,77,101,.1)",
+      interval: 1
+    },
+    data: [{
+      type: "column",
+      name: "Appointments",
+      axisYType: "secondary",
+      color: "red",
+      dataPoints: [
+
+        { y: curbCount, x: 10, label: "Curb-side pickup" },
+        { y: pickupCount, x: 20, label: "In-store pickup" },
+        { y: deliveryCount, x: 30, label: "Delivery" },
+        { y: injectionCount, x: 40, label: "Injection Services" },
+        { y: consultationCount, x: 50, label: "Consultation" } 
+      ]
+    }]
+  });
+  chart.render();
+
+}
+
+forecastButton.addEventListener('click', loadChart);
 
 
 

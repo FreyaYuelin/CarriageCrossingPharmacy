@@ -21,6 +21,7 @@ var optionSlot = [];
 var injectionSlot = [];
 var pickupSlot = [];
 var curbSideSlot = [];
+var consultationSlot = []
 
 var deliverySlot = ["11:00-11:30", "11:30-12:00", "12:00-12:30", "12-30:13:00", "13:00-13:30", "13:30-14:00", "17:30-18:00", "18:00-18:30", "18:30-19:00", "19:00-19:30", "19:30-20:00", "20:00-20:30"];
 
@@ -87,6 +88,17 @@ const activities = document.querySelector("#activities");
 
 const checkboxes = activities.getElementsByTagName("input");
 var curChecked;
+var checkedOption;
+
+
+var paymentRadio = document.querySelector('#payment').getElementsByTagName("input");
+paymentRadio = Array.prototype.slice.call(paymentRadio, 0, -1);
+
+
+for (let r of paymentRadio) {
+    log(r.parentElement.childNodes[0].textContent.trim())
+    r.addEventListener('click', checkPayment)
+}
 
 
 
@@ -103,6 +115,10 @@ for (let b of checkboxes) {
     if (b.checked) {
         curChecked = b;
     }
+}
+
+function checkPayment(e) {
+    checkedOption = e.target.parentElement;
 }
 
 function keepGreaterThanTwo(l) {
@@ -269,11 +285,13 @@ function generateHours() {
     injectionSlot = slotsTakenToday.filter(slot => slot.type === "Injection");
     pickupSlot = slotsTakenToday.filter(slot => slot.type === "In-store pickup");
     curbSideSlot = slotsTakenToday.filter(slot => slot.type === "Curb-side pickup");
+    consultationSlot = slotsTakenToday.filter(slot => slot.type === "Consultation");
 
 
     injectionSlot = injectionSlot.map(slot => slot.time);
     curbSideSlot = curbSideSlot.map(slot => slot.time);
     pickupSlot = pickupSlot.map(slot => slot.time);
+    consultationSlot = consultationSlot.map(slot => slot.time);
 
     var oldPickupSlot = pickupSlot;
     
@@ -289,14 +307,14 @@ function generateHours() {
     $('.grid-container').empty();
 
     intervals.forEach(i => {
-        
+    
         let slot = document.createElement("div");
         slot.setAttribute("class", "grid-item")
         let node = document.createTextNode(i);
         slot.appendChild(node);
         grid.appendChild(slot);
         //log(i, oldPickupSlot[0])
-        if ((option === "Curb-side pickup" && curbSideSlot.includes(i)) || ((option === "In-store pickup" || option === "Injection") && (pickupSlot.includes(i) || injectionSlot.includes(i)))) {
+        if ((option === "Curb-side pickup" && curbSideSlot.includes(i)) || ((option === "In-store pickup" || option === "Injection" || option === "Consultation") && (pickupSlot.includes(i) || injectionSlot.includes(i) || consultationSlot.includes(i)))) {
             slot.style.backgroundColor = "grey";
         }
         else if (option === "Injection" && oldPickupSlot.includes(i)) { // 1 in-store pickup prevents injection appointment
@@ -306,7 +324,7 @@ function generateHours() {
             slot.addEventListener('click', select);
         }      
     })
-    pickATime.innerHTML = "Pick a Time";
+    pickATime.innerHTML = "* Pick a Time";
     submitButton.disabled = false;
     if (selectedDay.getDay() === 0) {
         pickATime.innerHTML = "Store closed on Sunday"
@@ -513,8 +531,11 @@ function record(e) {
     e.preventDefault(e);
     var opt = curChecked.parentElement.childNodes[0].textContent.replace(/(\r\n|\n|\r)/gm,"").trim();
     const url = "/appointment";
+    if (typeof selectedTimeSlot === "undefined") {
+        alert("Please select a valid timeslot"  );
+        return;
+    }
     const data = {
-        // email: localStorage.getItem('email'),
         email: userObj.email,
         phone: userObj.phone,
         address: userObj.address,
@@ -522,12 +543,14 @@ function record(e) {
         year: year.innerHTML,
         day: days.querySelector(".active").innerHTML,
         specialConsiderations: considerations.value,
-        // option: curChecked.parentElement.childNodes[0].textContent,
         option: opt,
         start: selectedTimeSlot.innerHTML.split('-')[0],
-        finish: selectedTimeSlot.innerHTML.split('-')[1]
+        finish: selectedTimeSlot.innerHTML.split('-')[1],
+        payment: checkedOption.childNodes[0].textContent.trim()
     }
-    log(data)
+    let alertobj = "Email: " + data.email + "\n" + "Phone: " + data.phone + "\n" + "Address: " + data.address + "\n" + "Month: " + data.month + "\n" + "Year: " + data.year + "\n" + "Day: " + data.day + "\n" + "Special Considerations: " + data.specialConsiderations + "\n" + "Option: " + data.option + "\n" + "Start Hour: " + data.start + "\n" + "End Hour: " + data.finish + "\n" + "Chosen Payment Option: " + data.payment
+    alert(alertobj)
+
     const stringifiedData = JSON.stringify(data);
     const request = new Request(url, {
         method: "POST", 
